@@ -1,0 +1,16 @@
+name: Validate addon
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate pack structure and JSON
+        shell: powershell
+        run: ./scripts/validate.ps1

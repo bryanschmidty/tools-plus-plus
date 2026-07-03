@@ -1,9 +1,7 @@
 {
-  "resource_pack_name": "Tools++",
-  "texture_name": "atlas.terrain",
   "texture_data": {
-    "ruby": {
-      "textures": "textures/items/ruby"
+    "toolsplusplus:ruby": {
+      "textures": "textures/toolsplusplus/items/ruby"
     }
   }
 }

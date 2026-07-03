@@ -4,12 +4,11 @@
     "description": {
       "identifier": "toolsplusplus:ruby",
       "menu_category": {
-        "category": "items",
-        "group": "itemGroup.name.ingredients"
+        "category": "items"
       }
     },
     "components": {
-      "minecraft:icon": "ruby",
+      "minecraft:icon": "toolsplusplus:ruby",
       "minecraft:max_stack_size": 64
     }
   }

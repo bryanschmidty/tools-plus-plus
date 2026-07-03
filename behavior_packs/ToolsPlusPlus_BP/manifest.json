@@ -4,14 +4,20 @@
     "name": "Tools++ Behavior Pack",
     "description": "Tools++ addon — phase 1: ruby item and crafting recipe.",
     "uuid": "48c0a12f-2012-4b7d-be80-2ff0eef48154",
-    "version": [1, 0, 0],
+    "version": [1, 0, 4],
     "min_engine_version": [1, 21, 0]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "f5a02e35-689c-4ec4-89b8-67123ee69eeb",
-      "version": [1, 0, 0]
+      "version": [1, 0, 4]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "eea31dcf-46f3-4013-808d-e457953cd5af",
+      "version": [1, 0, 4]
     }
   ]
 }
