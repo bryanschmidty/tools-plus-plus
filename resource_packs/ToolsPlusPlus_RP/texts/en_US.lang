@@ -3,4 +3,6 @@ item.toolsplusplus:raw_ruby_chunk=Raw Ruby Chunk
 item.toolsplusplus:ruby_chunk=Ruby Chunk
 item.toolsplusplus:ruby_shard=Ruby Shard
 item.toolsplusplus:ruby_ore=Ruby Ore
+item.toolsplusplus:ruby_block=Block of Ruby
 tile.toolsplusplus:ruby_ore.name=Ruby Ore
+tile.toolsplusplus:ruby_block.name=Block of Ruby

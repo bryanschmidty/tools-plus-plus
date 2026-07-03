@@ -2,6 +2,9 @@
   "texture_data": {
     "toolsplusplus_ruby_ore": {
       "textures": "textures/toolsplusplus/blocks/ruby_ore"
+    },
+    "toolsplusplus_ruby_block": {
+      "textures": "textures/toolsplusplus/blocks/ruby_block"
     }
   }
 }

@@ -4,5 +4,10 @@
     "sound": "stone",
     "textures": "toolsplusplus_ruby_ore",
     "carried_textures": "toolsplusplus_ruby_ore"
+  },
+  "toolsplusplus:ruby_block": {
+    "sound": "metal",
+    "textures": "toolsplusplus_ruby_block",
+    "carried_textures": "toolsplusplus_ruby_block"
   }
 }

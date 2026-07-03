@@ -1,0 +1,24 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_block_from_ruby_chunks"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["CCC", "CCC", "CCC"],
+    "key": {
+      "C": {
+        "item": "toolsplusplus:ruby_chunk"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:ruby_chunk"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:ruby_block",
+      "count": 1
+    }
+  }
+}

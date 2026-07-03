@@ -87,7 +87,7 @@ Path: `behavior_packs/ToolsPlusPlus_BP/items/<id>.json`
 Path: `behavior_packs/ToolsPlusPlus_BP/recipes/<id>.json`
 
 - Recipe `description.identifier` must be unique (not the same as the item id)
-- Use `"format_version": "1.20.10"` for shaped recipes
+- Use `"format_version": "1.20.10"` for shaped recipes; include `"unlock"` with the ingredient item (required since 1.20.30 recipe unlocking)
 - Furnace: `minecraft:recipe_furnace` with `"tags": ["furnace", "blast_furnace"]`
 - Stonecutter: `minecraft:recipe_shapeless` with `"tags": ["stonecutter"]`, plus `"unlock"` (ingredient item) and `"priority": 0` — required since 1.20.30 recipe unlocking
 

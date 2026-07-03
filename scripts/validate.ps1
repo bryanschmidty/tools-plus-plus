@@ -6,19 +6,26 @@ $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 
 $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\manifest.json",
+    "behavior_packs\ToolsPlusPlus_BP\pack_icon.png",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby.json",
     "behavior_packs\ToolsPlusPlus_BP\items\raw_ruby_chunk.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_chunk.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_shard.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chunk_from_smelting.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_from_ruby_chunk_stonecutting.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_shard_from_ruby_stonecutting.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_block_from_ruby_chunks.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chunks_from_ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\features\ruby_ore_feature.json",
     "behavior_packs\ToolsPlusPlus_BP\feature_rules\ruby_ore_overworld.json",
     "resource_packs\ToolsPlusPlus_RP\manifest.json",
+    "resource_packs\ToolsPlusPlus_RP\pack_icon.png",
     "resource_packs\ToolsPlusPlus_RP\textures\item_texture.json",
     "resource_packs\ToolsPlusPlus_RP\textures\terrain_texture.json",
     "resource_packs\ToolsPlusPlus_RP\blocks.json",
@@ -27,6 +34,7 @@ $RequiredPaths = @(
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_chunk.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_shard.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_ore.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_block.png",
     "resource_packs\ToolsPlusPlus_RP\texts\en_US.lang",
     "resource_packs\ToolsPlusPlus_RP\texts\languages.json"
 )
@@ -80,6 +88,10 @@ function Test-TerrainTextureJson {
 
     if (-not $json.texture_data.toolsplusplus_ruby_ore) {
         throw "terrain_texture.json must define toolsplusplus_ruby_ore"
+    }
+
+    if (-not $json.texture_data.toolsplusplus_ruby_block) {
+        throw "terrain_texture.json must define toolsplusplus_ruby_block"
     }
 }
 
@@ -154,6 +166,45 @@ function Test-BlockRegistration {
     }
 }
 
+function Test-PackIcons {
+    Add-Type -AssemblyName System.Drawing
+
+    $iconPaths = @(
+        (Join-Path $RepoRoot "behavior_packs\ToolsPlusPlus_BP\pack_icon.png"),
+        (Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP\pack_icon.png")
+    )
+
+    foreach ($iconPath in $iconPaths) {
+        if (-not (Test-Path $iconPath)) {
+            throw "Missing pack icon: $iconPath"
+        }
+
+        $bytes = Get-Content -Path $iconPath -Encoding Byte -TotalCount 8
+        $signature = [byte[]](0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A)
+        for ($i = 0; $i -lt 8; $i++) {
+            if ($bytes[$i] -ne $signature[$i]) {
+                throw "Pack icon is not a valid PNG: $iconPath"
+            }
+        }
+
+        $image = [System.Drawing.Image]::FromFile($iconPath)
+        try {
+            if ($image.Width -ne $image.Height) {
+                Write-Warning "Pack icon should be square: $iconPath ($($image.Width)x$($image.Height))"
+            }
+            if ($image.Width -ne 256 -or $image.Height -ne 256) {
+                Write-Warning "Pack icon should be 256x256 for best display: $iconPath ($($image.Width)x$($image.Height))"
+            }
+            else {
+                Write-Host "OK: $iconPath (256x256 PNG)"
+            }
+        }
+        finally {
+            $image.Dispose()
+        }
+    }
+}
+
 function Test-ManifestPair {
     $bp = Get-Content (Join-Path $RepoRoot "behavior_packs\ToolsPlusPlus_BP\manifest.json") -Raw | ConvertFrom-Json
     $rp = Get-Content (Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP\manifest.json") -Raw | ConvertFrom-Json
@@ -192,6 +243,9 @@ Test-ResourcePackScope
 
 Write-Host "Checking block registration..."
 Test-BlockRegistration
+
+Write-Host "Checking pack icons..."
+Test-PackIcons
 
 Write-Host "Checking manifest dependency direction..."
 Test-ManifestPair
