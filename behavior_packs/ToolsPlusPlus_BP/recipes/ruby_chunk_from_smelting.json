@@ -1,0 +1,11 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_chunk_from_smelting"
+    },
+    "tags": ["furnace", "blast_furnace"],
+    "input": "toolsplusplus:raw_ruby_chunk",
+    "output": "toolsplusplus:ruby_chunk"
+  }
+}

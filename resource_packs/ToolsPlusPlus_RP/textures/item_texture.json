@@ -1,7 +1,16 @@
-{
-  "texture_data": {
-    "toolsplusplus:ruby": {
-      "textures": "textures/toolsplusplus/items/ruby"
-    }
-  }
-}
+{
+  "texture_data": {
+    "toolsplusplus:ruby": {
+      "textures": "textures/toolsplusplus/items/ruby"
+    },
+    "toolsplusplus:raw_ruby_chunk": {
+      "textures": "textures/toolsplusplus/items/raw_ruby_chunk"
+    },
+    "toolsplusplus:ruby_chunk": {
+      "textures": "textures/toolsplusplus/items/ruby_chunk"
+    },
+    "toolsplusplus:ruby_shard": {
+      "textures": "textures/toolsplusplus/items/ruby_shard"
+    }
+  }
+}

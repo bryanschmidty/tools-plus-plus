@@ -5,7 +5,8 @@ param(
     [string]$InputPath,
     [string]$OutputPath,
     [switch]$All,
-    [switch]$RemoveWhiteBackground
+    [switch]$RemoveWhiteBackground,
+    [switch]$RemoveGrayBackground
 )
 
 $ErrorActionPreference = "Stop"
@@ -14,11 +15,32 @@ Add-Type -AssemblyName System.Drawing
 $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 $ResourcePackRoot = Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP"
 
+function Test-NeutralGrayPixel {
+    param([System.Drawing.Color]$Color)
+
+    if ($Color.A -le 16) {
+        return $false
+    }
+
+    $maxChannelDiff = [Math]::Max(
+        [Math]::Abs($Color.R - $Color.G),
+        [Math]::Max([Math]::Abs($Color.G - $Color.B), [Math]::Abs($Color.R - $Color.B))
+    )
+
+    if ($maxChannelDiff -gt 20) {
+        return $false
+    }
+
+    $luminance = ($Color.R + $Color.G + $Color.B) / 3.0
+    return ($luminance -ge 80 -and $luminance -le 220)
+}
+
 function Convert-ItemTextureFile {
     param(
         [Parameter(Mandatory = $true)][string]$InputPath,
         [Parameter(Mandatory = $true)][string]$OutputPath,
-        [switch]$RemoveWhiteBackground
+        [switch]$RemoveWhiteBackground,
+        [switch]$RemoveGrayBackground
     )
 
     if (-not (Test-Path $InputPath)) {
@@ -58,6 +80,9 @@ function Convert-ItemTextureFile {
                 $color = $normalized.GetPixel($srcX, $srcY)
 
                 if ($RemoveWhiteBackground -and $color.A -gt 16 -and $color.R -gt 230 -and $color.G -gt 230 -and $color.B -gt 230) {
+                    $target.SetPixel($x, $y, [System.Drawing.Color]::FromArgb(0, 0, 0, 0))
+                }
+                elseif ($RemoveGrayBackground -and (Test-NeutralGrayPixel -Color $color)) {
                     $target.SetPixel($x, $y, [System.Drawing.Color]::FromArgb(0, 0, 0, 0))
                 }
                 else {
@@ -120,13 +145,13 @@ if ($All) {
     }
 
     foreach ($path in $texturePaths) {
-        Convert-ItemTextureFile -InputPath $path -OutputPath $path -RemoveWhiteBackground:$RemoveWhiteBackground
+        Convert-ItemTextureFile -InputPath $path -OutputPath $path -RemoveWhiteBackground:$RemoveWhiteBackground -RemoveGrayBackground:$RemoveGrayBackground
     }
 }
 elseif ($OutputPath -or $InputPath) {
     if (-not $OutputPath) { $OutputPath = $InputPath }
     if (-not $InputPath) { $InputPath = $OutputPath }
-    Convert-ItemTextureFile -InputPath $InputPath -OutputPath $OutputPath -RemoveWhiteBackground:$RemoveWhiteBackground
+    Convert-ItemTextureFile -InputPath $InputPath -OutputPath $OutputPath -RemoveWhiteBackground:$RemoveWhiteBackground -RemoveGrayBackground:$RemoveGrayBackground
 }
 else {
     throw @"

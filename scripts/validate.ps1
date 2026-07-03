@@ -7,12 +7,35 @@ $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\manifest.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby.json",
-    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\raw_ruby_chunk.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_chunk.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_shard.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chunk_from_smelting.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_from_ruby_chunk_stonecutting.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_shard_from_ruby_stonecutting.json",
+    "behavior_packs\ToolsPlusPlus_BP\features\ruby_ore_feature.json",
+    "behavior_packs\ToolsPlusPlus_BP\feature_rules\ruby_ore_overworld.json",
     "resource_packs\ToolsPlusPlus_RP\manifest.json",
     "resource_packs\ToolsPlusPlus_RP\textures\item_texture.json",
+    "resource_packs\ToolsPlusPlus_RP\textures\terrain_texture.json",
+    "resource_packs\ToolsPlusPlus_RP\blocks.json",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\raw_ruby_chunk.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_chunk.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_shard.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_ore.png",
     "resource_packs\ToolsPlusPlus_RP\texts\en_US.lang",
     "resource_packs\ToolsPlusPlus_RP\texts\languages.json"
+)
+
+$RequiredItemTextureShortnames = @(
+    "toolsplusplus:ruby",
+    "toolsplusplus:raw_ruby_chunk",
+    "toolsplusplus:ruby_chunk",
+    "toolsplusplus:ruby_shard"
 )
 
 function Test-JsonFile {
@@ -36,22 +59,97 @@ function Test-ItemTextureJson {
         throw "item_texture.json must define texture_data"
     }
 
-    if (-not $json.texture_data.'toolsplusplus:ruby') {
-        throw "item_texture.json must define shortname 'toolsplusplus:ruby'"
+    foreach ($shortname in $RequiredItemTextureShortnames) {
+        if (-not $json.texture_data.$shortname) {
+            throw "item_texture.json must define shortname '$shortname'"
+        }
+    }
+}
+
+function Test-TerrainTextureJson {
+    param([string]$Path)
+    $json = Get-Content $Path -Raw | ConvertFrom-Json
+
+    if ($json.texture_name -eq "atlas.items") {
+        throw "terrain_texture.json must never use atlas.items"
+    }
+
+    if (-not $json.texture_data) {
+        throw "terrain_texture.json must define texture_data"
+    }
+
+    if (-not $json.texture_data.toolsplusplus_ruby_ore) {
+        throw "terrain_texture.json must define toolsplusplus_ruby_ore"
     }
 }
 
 function Test-ResourcePackScope {
     $rpRoot = Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP"
-    $forbidden = @(
+    $required = @(
         "textures\terrain_texture.json",
-        "blocks.json",
-        "textures\flipbook_textures.json"
+        "blocks.json"
     )
 
-    foreach ($relativePath in $forbidden) {
-        if (Test-Path (Join-Path $rpRoot $relativePath)) {
-            throw "Resource pack must not include $relativePath for item-only phase 1 content"
+    foreach ($relativePath in $required) {
+        if (-not (Test-Path (Join-Path $rpRoot $relativePath))) {
+            throw "Resource pack must include $relativePath for block content"
+        }
+    }
+}
+
+function Test-BlockRegistration {
+    $bpRoot = Join-Path $RepoRoot "behavior_packs\ToolsPlusPlus_BP"
+    $blockFiles = Get-ChildItem -Path (Join-Path $bpRoot "blocks") -Filter *.json -File -ErrorAction SilentlyContinue
+
+    foreach ($blockFile in $blockFiles) {
+        $blockJson = Get-Content $blockFile.FullName -Raw | ConvertFrom-Json
+        $block = $blockJson.'minecraft:block'
+        $blockId = $block.description.identifier
+        if (-not $blockId) {
+            throw "Block file missing identifier: $($blockFile.Name)"
+        }
+
+        $itemPath = Join-Path $bpRoot "items\$($blockFile.BaseName).json"
+        $hasItem = Test-Path $itemPath
+        $hasMenu = [bool]$block.description.menu_category
+        $hasItemVisual = [bool]$block.components.'minecraft:item_visual'
+        $hasGeometry = [bool]$block.components.'minecraft:geometry'
+        $hasMaterials = [bool]$block.components.'minecraft:material_instances'
+
+        if (-not $hasGeometry -or -not $hasMaterials) {
+            throw "Block '$blockId' must define minecraft:geometry and minecraft:material_instances"
+        }
+
+        if (-not $hasItemVisual) {
+            throw "Block '$blockId' must define minecraft:item_visual for 3D inventory rendering"
+        }
+
+        if ($hasItem) {
+            $itemJson = Get-Content $itemPath -Raw | ConvertFrom-Json
+            $itemId = $itemJson.'minecraft:item'.description.identifier
+            if ($itemId -ne $blockId) {
+                throw "Item identifier '$itemId' must match block identifier '$blockId'"
+            }
+
+            $placer = $itemJson.'minecraft:item'.components.'minecraft:block_placer'
+            if (-not $placer) {
+                throw "items/$($blockFile.BaseName).json must include minecraft:block_placer"
+            }
+            if ($placer.block -ne $blockId) {
+                throw "block_placer.block must be '$blockId' in items/$($blockFile.BaseName).json"
+            }
+            if (-not $placer.replace_block_item) {
+                throw "block_placer.replace_block_item must be true in items/$($blockFile.BaseName).json"
+            }
+            if ($itemJson.'minecraft:item'.components.'minecraft:icon') {
+                throw "items/$($blockFile.BaseName).json must not use minecraft:icon on cube blocks"
+            }
+            if ($itemJson.format_version -lt "1.21.50") {
+                throw "items/$($blockFile.BaseName).json format_version must be 1.21.50+ for 3D block_placer icons"
+            }
+        }
+        elseif (-not $hasMenu) {
+            throw "Block '$blockId' needs menu_category on the block or a matching block_placer item with menu_category"
         }
     }
 }
@@ -86,8 +184,14 @@ Get-ChildItem -Path $RepoRoot -Recurse -Filter *.json -File |
 Write-Host "Checking item_texture.json rules..."
 Test-ItemTextureJson (Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP\textures\item_texture.json")
 
+Write-Host "Checking terrain_texture.json rules..."
+Test-TerrainTextureJson (Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP\textures\terrain_texture.json")
+
 Write-Host "Checking resource pack scope..."
 Test-ResourcePackScope
+
+Write-Host "Checking block registration..."
+Test-BlockRegistration
 
 Write-Host "Checking manifest dependency direction..."
 Test-ManifestPair

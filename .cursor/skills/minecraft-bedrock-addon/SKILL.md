@@ -7,6 +7,7 @@ description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ �
 
 ## Related skills
 
+- **Custom blocks** (creative, placement, terrain textures) → **minecraft-bedrock-blocks**
 - Textures and PNGs → **minecraft-bedrock-textures**
 - Installing to Minecraft on Windows → **minecraft-bedrock-install**
 
@@ -16,11 +17,18 @@ description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ �
 behavior_packs/ToolsPlusPlus_BP/
   manifest.json
   items/
+  blocks/
   recipes/
+  loot_tables/blocks/
+  features/
+  feature_rules/
 resource_packs/ToolsPlusPlus_RP/
   manifest.json
+  blocks.json
   textures/item_texture.json
+  textures/terrain_texture.json
   textures/toolsplusplus/items/*.png
+  textures/toolsplusplus/blocks/*.png
   texts/en_US.lang
   texts/languages.json
 scripts/validate.ps1
@@ -40,7 +48,7 @@ scripts/install.ps1
 "dependencies": [
   {
     "uuid": "eea31dcf-46f3-4013-808d-e457953cd5af",
-    "version": [1, 0, 4]
+    "version": [1, 1, 0]
   }
 ]
 ```
@@ -80,6 +88,26 @@ Path: `behavior_packs/ToolsPlusPlus_BP/recipes/<id>.json`
 
 - Recipe `description.identifier` must be unique (not the same as the item id)
 - Use `"format_version": "1.20.10"` for shaped recipes
+- Furnace: `minecraft:recipe_furnace` with `"tags": ["furnace", "blast_furnace"]`
+- Stonecutter: `minecraft:recipe_shapeless` with `"tags": ["stonecutter"]`, plus `"unlock"` (ingredient item) and `"priority": 0` — required since 1.20.30 recipe unlocking
+
+## Custom block (BP)
+
+See **minecraft-bedrock-blocks** for the full block + block-placer item workflow. Every block requires matching `blocks/<id>.json` and `items/<id>.json` with `minecraft:block_placer`.
+
+## Ore world generation (BP)
+
+Requires **Creation of Custom Biomes** experiment enabled in world settings.
+
+```
+behavior_packs/ToolsPlusPlus_BP/features/<name>_feature.json     # minecraft:ore_feature
+behavior_packs/ToolsPlusPlus_BP/feature_rules/<name>_overworld.json  # minecraft:feature_rules
+```
+
+- Feature filename must match identifier suffix
+- `placement_pass`: `underground_pass`
+- `minecraft:biome_filter`: `has_biome_tag` == `overworld`
+- Ore appears only in newly generated chunks
 
 ## Localization (RP)
 
@@ -87,6 +115,7 @@ Path: `behavior_packs/ToolsPlusPlus_BP/recipes/<id>.json`
 
 ```
 item.toolsplusplus:ruby=Ruby
+tile.toolsplusplus:ruby_ore=Ruby Ore
 ```
 
 `texts/languages.json` must list `en_US`.

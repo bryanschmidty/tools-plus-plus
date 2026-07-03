@@ -1,0 +1,24 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_from_ruby_chunk_stonecutting"
+    },
+    "tags": ["stonecutter"],
+    "priority": 0,
+    "ingredients": [
+      {
+        "item": "toolsplusplus:ruby_chunk"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "toolsplusplus:ruby_chunk"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:ruby",
+      "count": 3
+    }
+  }
+}
