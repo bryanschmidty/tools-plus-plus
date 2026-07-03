@@ -1,0 +1,27 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_spear_from_rubies"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["  X", " # ", "#  "],
+    "key": {
+      "X": {
+        "item": "toolsplusplus:ruby"
+      },
+      "#": {
+        "item": "minecraft:stick"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:ruby"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:ruby_spear",
+      "count": 1
+    }
+  }
+}

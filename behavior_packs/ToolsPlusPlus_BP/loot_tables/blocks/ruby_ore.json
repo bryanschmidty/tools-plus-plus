@@ -13,7 +13,8 @@
           "minecraft:match_tool_filter_any": [
             "minecraft:iron_tier",
             "minecraft:diamond_tier",
-            "minecraft:netherite_tier"
+            "minecraft:netherite_tier",
+            "toolsplusplus:ruby_tier"
           ]
         }
       ],

@@ -1,16 +1,25 @@
-{
-  "texture_data": {
-    "toolsplusplus:ruby": {
-      "textures": "textures/toolsplusplus/items/ruby"
-    },
-    "toolsplusplus:raw_ruby_chunk": {
-      "textures": "textures/toolsplusplus/items/raw_ruby_chunk"
-    },
-    "toolsplusplus:ruby_chunk": {
-      "textures": "textures/toolsplusplus/items/ruby_chunk"
-    },
-    "toolsplusplus:ruby_shard": {
-      "textures": "textures/toolsplusplus/items/ruby_shard"
-    }
-  }
-}
+{
+  "texture_data": {
+    "toolsplusplus:ruby": {
+      "textures": "textures/toolsplusplus/items/ruby"
+    },
+    "toolsplusplus:raw_ruby_chunk": {
+      "textures": "textures/toolsplusplus/items/raw_ruby_chunk"
+    },
+    "toolsplusplus:ruby_chunk": {
+      "textures": "textures/toolsplusplus/items/ruby_chunk"
+    },
+    "toolsplusplus:ruby_shard": {
+      "textures": "textures/toolsplusplus/items/ruby_shard"
+    },
+    "toolsplusplus:ruby_pickaxe": {
+      "textures": "textures/toolsplusplus/items/ruby_pickaxe"
+    },
+    "toolsplusplus:ruby_sword": {
+      "textures": "textures/toolsplusplus/items/ruby_sword"
+    },
+    "toolsplusplus:ruby_spear": {
+      "textures": "textures/toolsplusplus/items/ruby_spear"
+    }
+  }
+}

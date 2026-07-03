@@ -13,6 +13,9 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_shard.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_block.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_pickaxe.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_sword.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_spear.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_ore.json",
@@ -22,6 +25,9 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_shard_from_ruby_stonecutting.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_block_from_ruby_chunks.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chunks_from_ruby_block.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_pickaxe_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_sword_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_spear_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\features\ruby_ore_feature.json",
     "behavior_packs\ToolsPlusPlus_BP\feature_rules\ruby_ore_overworld.json",
     "resource_packs\ToolsPlusPlus_RP\manifest.json",
@@ -33,8 +39,16 @@ $RequiredPaths = @(
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\raw_ruby_chunk.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_chunk.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_shard.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_pickaxe.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_sword.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_spear.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_ore.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_block.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\entity\spear\ruby_spear.png",
+    "resource_packs\ToolsPlusPlus_RP\attachables\ruby_spear.json",
+    "resource_packs\ToolsPlusPlus_RP\models\entity\spear.geo.json",
+    "resource_packs\ToolsPlusPlus_RP\animations\spear.animation.json",
+    "resource_packs\ToolsPlusPlus_RP\animation_controllers\spear.animation_controllers.json",
     "resource_packs\ToolsPlusPlus_RP\texts\en_US.lang",
     "resource_packs\ToolsPlusPlus_RP\texts\languages.json"
 )
@@ -43,7 +57,10 @@ $RequiredItemTextureShortnames = @(
     "toolsplusplus:ruby",
     "toolsplusplus:raw_ruby_chunk",
     "toolsplusplus:ruby_chunk",
-    "toolsplusplus:ruby_shard"
+    "toolsplusplus:ruby_shard",
+    "toolsplusplus:ruby_pickaxe",
+    "toolsplusplus:ruby_sword",
+    "toolsplusplus:ruby_spear"
 )
 
 function Test-JsonFile {

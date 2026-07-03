@@ -18,6 +18,35 @@ $KnownFolderNames = @(
     "Tools++Res"
 )
 
+function Write-InstallHeading {
+    param([string]$Text)
+    Write-Host $Text -ForegroundColor Cyan
+}
+
+function Write-InstallItem {
+    param(
+        [string]$Label,
+        [string]$RelativePath,
+        [ConsoleColor]$Color = 'Green'
+    )
+    Write-Host ("  {0,-10} {1}" -f "${Label}:", $RelativePath) -ForegroundColor $Color
+}
+
+function Get-RelativeInstallPath {
+    param(
+        [string]$MinecraftRoot,
+        [string]$FullPath
+    )
+
+    $root = [System.IO.Path]::GetFullPath($MinecraftRoot).TrimEnd('\')
+    $full = [System.IO.Path]::GetFullPath($FullPath)
+    if ($full.StartsWith($root, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $full.Substring($root.Length).TrimStart('\')
+    }
+
+    return (Split-Path $FullPath -Leaf)
+}
+
 function Get-MinecraftRoots {
     $candidates = @(
         (Join-Path $env:APPDATA "Minecraft Bedrock\users\shared\games\com.mojang")
@@ -74,7 +103,7 @@ function Remove-ToolsPlusPlusInstalls {
 
             if ($remove) {
                 Remove-Item $entry.FullName -Recurse -Force
-                Write-Host "Removed: $($entry.FullName)"
+                Write-InstallItem -Label "Removed" -RelativePath (Get-RelativeInstallPath -MinecraftRoot $MinecraftRoot -FullPath $entry.FullName) -Color DarkYellow
             }
         }
     }
@@ -83,7 +112,8 @@ function Remove-ToolsPlusPlusInstalls {
 function Copy-Pack {
     param(
         [string]$Source,
-        [string]$Target
+        [string]$Target,
+        [string]$MinecraftRoot
     )
 
     $parent = Split-Path $Target -Parent
@@ -100,7 +130,7 @@ function Copy-Pack {
         throw "Failed to copy pack to $Target"
     }
 
-    Write-Host "Installed: $Target"
+    Write-InstallItem -Label "Installed" -RelativePath (Get-RelativeInstallPath -MinecraftRoot $MinecraftRoot -FullPath $Target)
 }
 
 function Test-InstalledTexture {
@@ -121,7 +151,7 @@ function Test-InstalledTexture {
         throw "Installed texture does not match repo: $installedPath"
     }
 
-    Write-Host "Verified texture hash in: $installedPath"
+    Write-InstallItem -Label "Verified" -RelativePath $relative -Color DarkCyan
 }
 
 if (Test-MinecraftRunning) {
@@ -135,40 +165,41 @@ $repoRuby = Join-Path $RepoRoot "resource_packs\ToolsPlusPlus_RP\textures\toolsp
 $roots = Get-MinecraftRoots
 
 Write-Host ""
-Write-Host "Minecraft data roots:"
+Write-InstallHeading "Minecraft data roots:"
 foreach ($root in $roots) {
-    Write-Host "  $root"
+    Write-Host "  $root" -ForegroundColor Gray
 }
 
 Write-Host ""
-Write-Host "Cleaning old Tools++ installs..."
+Write-InstallHeading "Cleaning old Tools++ installs..."
 foreach ($root in $roots) {
+    Write-Host "  $root" -ForegroundColor Gray
     Remove-ToolsPlusPlusInstalls -MinecraftRoot $root
 }
 
 foreach ($root in $roots) {
     Write-Host ""
-    Write-Host "Installing into: $root"
+    Write-InstallHeading "Installing into: $root"
 
     $devBpTarget = Join-Path $root "development_behavior_packs\ToolsPlusPlus_BP"
     $devRpTarget = Join-Path $root "development_resource_packs\ToolsPlusPlus_RP"
     $bpTarget = Join-Path $root "behavior_packs\ToolsPlusPlus_BP"
     $rpTarget = Join-Path $root "resource_packs\ToolsPlusPlus_RP"
 
-    Copy-Pack -Source $BpSource -Target $devBpTarget
-    Copy-Pack -Source $RpSource -Target $devRpTarget
-    Copy-Pack -Source $BpSource -Target $bpTarget
-    Copy-Pack -Source $RpSource -Target $rpTarget
+    Copy-Pack -Source $BpSource -Target $devBpTarget -MinecraftRoot $root
+    Copy-Pack -Source $RpSource -Target $devRpTarget -MinecraftRoot $root
+    Copy-Pack -Source $BpSource -Target $bpTarget -MinecraftRoot $root
+    Copy-Pack -Source $RpSource -Target $rpTarget -MinecraftRoot $root
 
     Test-InstalledTexture -MinecraftRoot $root -RepoTexturePath $repoRuby
 }
 
 Write-Host ""
-Write-Host "Done."
-Write-Host "1. Open Minecraft."
-Write-Host "2. Edit your world and REMOVE old Tools++ packs if still listed."
-Write-Host "3. Activate Tools++ Behavior Pack (development or My Packs)."
-Write-Host "4. Re-enter the world, or run /reload all in-game."
+Write-Host "Done." -ForegroundColor Green
+Write-Host "1. Open Minecraft." -ForegroundColor White
+Write-Host "2. Edit your world and REMOVE old Tools++ packs if still listed." -ForegroundColor White
+Write-Host "3. Activate Tools++ Behavior Pack (development or My Packs)." -ForegroundColor White
+Write-Host "4. Re-enter the world, or run /reload all in-game." -ForegroundColor White
 Write-Host ""
-Write-Host "Note: Modern Bedrock uses:"
-Write-Host "  $env:APPDATA\Minecraft Bedrock\users\shared\games\com.mojang"
+Write-Host "Note: Modern Bedrock uses:" -ForegroundColor DarkGray
+Write-Host "  $env:APPDATA\Minecraft Bedrock\users\shared\games\com.mojang" -ForegroundColor DarkGray
