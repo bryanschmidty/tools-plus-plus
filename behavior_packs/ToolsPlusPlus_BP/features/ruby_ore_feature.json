@@ -9,7 +9,12 @@
       {
         "places_block": "toolsplusplus:ruby_ore",
         "may_replace": [
-          "minecraft:stone",
+          "minecraft:stone"
+        ]
+      },
+      {
+        "places_block": "toolsplusplus:deepslate_ruby_ore",
+        "may_replace": [
           "minecraft:deepslate",
           "minecraft:tuff"
         ]

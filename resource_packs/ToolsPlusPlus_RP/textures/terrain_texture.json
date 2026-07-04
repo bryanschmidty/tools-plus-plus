@@ -5,6 +5,9 @@
     },
     "toolsplusplus_ruby_block": {
       "textures": "textures/toolsplusplus/blocks/ruby_block"
+    },
+    "toolsplusplus_deepslate_ruby_ore": {
+      "textures": "textures/toolsplusplus/blocks/deepslate_ruby_ore"
     }
   }
 }

@@ -16,9 +16,15 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_pickaxe.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_sword.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_spear.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_axe.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_hoe.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_shovel.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\deepslate_ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\blocks\deepslate_ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_ore.json",
+    "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\deepslate_ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\loot_tables\blocks\ruby_block.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chunk_from_smelting.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_from_ruby_chunk_stonecutting.json",
@@ -28,6 +34,9 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_pickaxe_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_sword_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_spear_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_axe_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_hoe_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_shovel_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\features\ruby_ore_feature.json",
     "behavior_packs\ToolsPlusPlus_BP\feature_rules\ruby_ore_overworld.json",
     "resource_packs\ToolsPlusPlus_RP\manifest.json",
@@ -42,7 +51,11 @@ $RequiredPaths = @(
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_pickaxe.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_sword.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_spear.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_axe.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_hoe.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_shovel.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_ore.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\deepslate_ruby_ore.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_block.png",
     "resource_packs\ToolsPlusPlus_RP\textures\entity\spear\ruby_spear.png",
     "resource_packs\ToolsPlusPlus_RP\attachables\ruby_spear.json",
@@ -60,7 +73,10 @@ $RequiredItemTextureShortnames = @(
     "toolsplusplus:ruby_shard",
     "toolsplusplus:ruby_pickaxe",
     "toolsplusplus:ruby_sword",
-    "toolsplusplus:ruby_spear"
+    "toolsplusplus:ruby_spear",
+    "toolsplusplus:ruby_axe",
+    "toolsplusplus:ruby_hoe",
+    "toolsplusplus:ruby_shovel"
 )
 
 function Test-JsonFile {
@@ -109,6 +125,10 @@ function Test-TerrainTextureJson {
 
     if (-not $json.texture_data.toolsplusplus_ruby_block) {
         throw "terrain_texture.json must define toolsplusplus_ruby_block"
+    }
+
+    if (-not $json.texture_data.toolsplusplus_deepslate_ruby_ore) {
+        throw "terrain_texture.json must define toolsplusplus_deepslate_ruby_ore"
     }
 }
 

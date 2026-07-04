@@ -20,6 +20,15 @@
     },
     "toolsplusplus:ruby_spear": {
       "textures": "textures/toolsplusplus/items/ruby_spear"
+    },
+    "toolsplusplus:ruby_axe": {
+      "textures": "textures/toolsplusplus/items/ruby_axe"
+    },
+    "toolsplusplus:ruby_hoe": {
+      "textures": "textures/toolsplusplus/items/ruby_hoe"
+    },
+    "toolsplusplus:ruby_shovel": {
+      "textures": "textures/toolsplusplus/items/ruby_shovel"
     }
   }
 }

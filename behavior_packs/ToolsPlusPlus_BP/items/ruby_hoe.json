@@ -1,0 +1,55 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_hoe",
+      "menu_category": {
+        "category": "equipment",
+        "group": "minecraft:itemGroup.name.hoe"
+      }
+    },
+    "components": {
+      "minecraft:icon": "toolsplusplus:ruby_hoe",
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:durability": {
+        "max_durability": 875
+      },
+      "minecraft:digger": {
+        "use_efficiency": true,
+        "destroy_speeds": [
+          {
+            "block": {
+              "tags": "q.any_tag('minecraft:is_hoe_item_destructible')"
+            },
+            "speed": 7
+          }
+        ]
+      },
+      "minecraft:enchantable": {
+        "slot": "hoe",
+        "value": 10
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": ["toolsplusplus:ruby_hoe"],
+            "repair_amount": "context.other->query.remaining_durability"
+          },
+          {
+            "items": ["toolsplusplus:ruby"],
+            "repair_amount": "query.max_durability * 0.25"
+          }
+        ]
+      },
+      "minecraft:tags": {
+        "tags": [
+          "minecraft:is_tool",
+          "minecraft:is_hoe",
+          "toolsplusplus:ruby_tier",
+          "minecraft:iron_tier_destructible"
+        ]
+      }
+    }
+  }
+}
