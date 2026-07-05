@@ -4,20 +4,32 @@
     "name": "Tools++ Behavior Pack",
     "description": "Tools++ addon — ruby ore, processing chain, and world generation.",
     "uuid": "48c0a12f-2012-4b7d-be80-2ff0eef48154",
-    "version": [1, 1, 17],
+    "version": [1, 1, 21],
     "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "f5a02e35-689c-4ec4-89b8-67123ee69eeb",
-      "version": [1, 1, 17]
+      "version": [1, 1, 21]
+    },
+    {
+      "description": "Tools++ experience rewards for ruby ores and smelting",
+      "type": "script",
+      "language": "javascript",
+      "uuid": "b7e4a901-3c58-4f6d-9a2e-1d8f0c6b4e27",
+      "version": [1, 1, 21],
+      "entry": "scripts/main.js"
     }
   ],
   "dependencies": [
     {
       "uuid": "eea31dcf-46f3-4013-808d-e457953cd5af",
-      "version": [1, 1, 17]
+      "version": [1, 1, 21]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.7.0"
     }
   ]
 }

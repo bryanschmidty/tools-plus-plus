@@ -71,6 +71,36 @@ function Test-MinecraftRunning {
     return $null -ne (Get-Process -Name "Minecraft.Windows" -ErrorAction SilentlyContinue)
 }
 
+function Wait-ForMinecraftToClose {
+    param(
+        [int]$TimeoutSeconds = 60,
+        [int]$PollIntervalSeconds = 3
+    )
+
+    if (-not (Test-MinecraftRunning)) {
+        return
+    }
+
+    Write-Host ""
+    Write-Warning "Minecraft is running. Waiting for it to close (up to $TimeoutSeconds seconds)..."
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        Start-Sleep -Seconds $PollIntervalSeconds
+
+        if (-not (Test-MinecraftRunning)) {
+            Write-Host "Minecraft closed. Continuing install..." -ForegroundColor Green
+            return
+        }
+
+        $remaining = [Math]::Max(0, [int](($deadline - (Get-Date)).TotalSeconds))
+        Write-Host "  Still waiting... ($remaining s remaining)" -ForegroundColor DarkYellow
+    }
+
+    Write-Warning "Close Minecraft completely, then run this script again."
+    exit 1
+}
+
 function Remove-ToolsPlusPlusInstalls {
     param([string]$MinecraftRoot)
 
@@ -154,10 +184,7 @@ function Test-InstalledTexture {
     Write-InstallItem -Label "Verified" -RelativePath $relative -Color DarkCyan
 }
 
-if (Test-MinecraftRunning) {
-    Write-Warning "Close Minecraft completely, then run this script again."
-    exit 1
-}
+Wait-ForMinecraftToClose -TimeoutSeconds 60 -PollIntervalSeconds 3
 
 & (Join-Path $PSScriptRoot "validate.ps1")
 

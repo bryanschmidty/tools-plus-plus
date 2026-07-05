@@ -38,6 +38,10 @@
         "explosion_resistance": 3.0
       },
       "minecraft:map_color": "#993333",
+      "toolsplusplus:experience_reward": {
+        "min": 0,
+        "max": 2
+      },
       "minecraft:tags": [
         "minecraft:is_pickaxe_item_destructible",
         "minecraft:iron_tier_destructible"

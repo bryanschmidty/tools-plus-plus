@@ -6,6 +6,7 @@ $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 
 $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\manifest.json",
+    "behavior_packs\ToolsPlusPlus_BP\scripts\main.js",
     "behavior_packs\ToolsPlusPlus_BP\pack_icon.png",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby.json",
     "behavior_packs\ToolsPlusPlus_BP\items\raw_ruby_chunk.json",
@@ -19,6 +20,10 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_axe.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_hoe.json",
     "behavior_packs\ToolsPlusPlus_BP\items\ruby_shovel.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_helmet.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_chestplate.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_leggings.json",
+    "behavior_packs\ToolsPlusPlus_BP\items\ruby_boots.json",
     "behavior_packs\ToolsPlusPlus_BP\items\deepslate_ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\ruby_ore.json",
     "behavior_packs\ToolsPlusPlus_BP\blocks\deepslate_ruby_ore.json",
@@ -37,6 +42,10 @@ $RequiredPaths = @(
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_axe_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_hoe_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_shovel_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_helmet_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_chestplate_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_leggings_from_rubies.json",
+    "behavior_packs\ToolsPlusPlus_BP\recipes\ruby_boots_from_rubies.json",
     "behavior_packs\ToolsPlusPlus_BP\features\ruby_ore_feature.json",
     "behavior_packs\ToolsPlusPlus_BP\feature_rules\ruby_ore_overworld.json",
     "resource_packs\ToolsPlusPlus_RP\manifest.json",
@@ -54,11 +63,21 @@ $RequiredPaths = @(
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_axe.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_hoe.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_shovel.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_helmet.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_chestplate.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_leggings.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\items\ruby_boots.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\models\armor\ruby_1.png",
+    "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\models\armor\ruby_2.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_ore.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\deepslate_ruby_ore.png",
     "resource_packs\ToolsPlusPlus_RP\textures\toolsplusplus\blocks\ruby_block.png",
     "resource_packs\ToolsPlusPlus_RP\textures\entity\spear\ruby_spear.png",
     "resource_packs\ToolsPlusPlus_RP\attachables\ruby_spear.json",
+    "resource_packs\ToolsPlusPlus_RP\attachables\ruby_helmet.json",
+    "resource_packs\ToolsPlusPlus_RP\attachables\ruby_chestplate.json",
+    "resource_packs\ToolsPlusPlus_RP\attachables\ruby_leggings.json",
+    "resource_packs\ToolsPlusPlus_RP\attachables\ruby_boots.json",
     "resource_packs\ToolsPlusPlus_RP\models\entity\spear.geo.json",
     "resource_packs\ToolsPlusPlus_RP\animations\spear.animation.json",
     "resource_packs\ToolsPlusPlus_RP\animation_controllers\spear.animation_controllers.json",
@@ -76,7 +95,11 @@ $RequiredItemTextureShortnames = @(
     "toolsplusplus:ruby_spear",
     "toolsplusplus:ruby_axe",
     "toolsplusplus:ruby_hoe",
-    "toolsplusplus:ruby_shovel"
+    "toolsplusplus:ruby_shovel",
+    "toolsplusplus:ruby_helmet",
+    "toolsplusplus:ruby_chestplate",
+    "toolsplusplus:ruby_leggings",
+    "toolsplusplus:ruby_boots"
 )
 
 function Test-JsonFile {
@@ -171,6 +194,10 @@ function Test-BlockRegistration {
 
         if (-not $hasItemVisual) {
             throw "Block '$blockId' must define minecraft:item_visual for 3D inventory rendering"
+        }
+
+        if ($blockId -match '_ore$' -and -not $block.components.'toolsplusplus:experience_reward') {
+            throw "Ore block '$blockId' must define toolsplusplus:experience_reward for mining XP"
         }
 
         if ($hasItem) {

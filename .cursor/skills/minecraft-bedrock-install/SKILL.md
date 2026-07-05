@@ -8,6 +8,7 @@ description: Installs Tools++ Minecraft Bedrock packs on Windows — GDK vs UWP 
 ## Related skills
 
 - Pack JSON → **minecraft-bedrock-addon**
+- Script API → **minecraft-bedrock-scripts**
 - Textures and PNGs → **minecraft-bedrock-textures**
 
 ## Critical: two Windows paths exist
@@ -48,7 +49,7 @@ Importing `.mcpack` files may create folders unlike the repo names:
 powershell -ExecutionPolicy Bypass -File ./scripts/install.ps1
 ```
 
-**Minecraft must be fully closed** or the script exits.
+If Minecraft is running, the script **waits up to 60 seconds** (polling every 3s) for it to close, then continues or exits with a warning.
 
 ## Install targets (per root)
 
@@ -69,6 +70,8 @@ Use `development_*` for day-to-day edits — Bedrock reloads them when you re-en
 4. RP auto-applies via BP dependency
 5. Re-enter world, or run **`/reload all`** in-game
 
+**Beta APIs are not required** for Tools++ scripts (XP, smelting, tool durability). Do not tell the user to enable that experiment.
+
 If textures still look old, create a **new test world** — worlds can cache pack content.
 
 ## Edit → test loop
@@ -76,6 +79,7 @@ If textures still look old, create a **new test world** — worlds can cache pac
 | Change type | Action |
 |-------------|--------|
 | BP JSON (items, recipes) | `install.ps1` → `/reload` in-game |
+| BP scripts (`main.js`) | `install.ps1` → re-enter world or `/reload all` |
 | RP texture or lang | `install.ps1` → re-enter world |
 | Manifest version bump | Remove/re-add pack on world |
 

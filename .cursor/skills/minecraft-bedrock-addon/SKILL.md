@@ -1,6 +1,6 @@
 ---
 name: minecraft-bedrock-addon
-description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ — manifests, custom items, recipes, and lang files. Use when editing manifest.json, items/*.json, recipes/*.json, or en_US.lang. Do not use for textures or install paths.
+description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ — manifests, custom items, recipes, and lang files. Use when editing manifest.json, items/*.json, recipes/*.json, or en_US.lang. Do not use for textures, install paths, or Script API (see minecraft-bedrock-scripts).
 ---
 
 # Minecraft Bedrock Addon JSON (Tools++)
@@ -8,6 +8,7 @@ description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ �
 ## Related skills
 
 - **Custom blocks** (creative, placement, terrain textures) → **minecraft-bedrock-blocks**
+- **Script API** (main.js, XP, tool durability) → **minecraft-bedrock-scripts**
 - Textures and PNGs → **minecraft-bedrock-textures**
 - Installing to Minecraft on Windows → **minecraft-bedrock-install**
 
@@ -95,9 +96,13 @@ Path: `behavior_packs/ToolsPlusPlus_BP/recipes/<id>.json`
 
 See **minecraft-bedrock-blocks** for the full block + block-placer item workflow. Every block requires matching `blocks/<id>.json` and `items/<id>.json` with `minecraft:block_placer`.
 
+## Script API (BP)
+
+See **minecraft-bedrock-scripts**. Scripts run without Beta APIs — never instruct the user to enable that experiment for XP, smelting, or tool durability.
+
 ## Ore world generation (BP)
 
-Requires **Creation of Custom Biomes** experiment enabled in world settings.
+Requires **Creation of Custom Biomes** experiment enabled in world settings (not Beta APIs).
 
 ```
 behavior_packs/ToolsPlusPlus_BP/features/<name>_feature.json     # minecraft:ore_feature

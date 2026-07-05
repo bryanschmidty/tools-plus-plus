@@ -4,14 +4,14 @@
     "name": "Tools++ Resource Pack",
     "description": "Tools++ addon — ruby ore block, item textures, and localization.",
     "uuid": "eea31dcf-46f3-4013-808d-e457953cd5af",
-    "version": [1, 1, 17],
+    "version": [1, 1, 21],
     "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
       "type": "resources",
       "uuid": "9c140079-5b53-4750-8f44-e7565c9d2a84",
-      "version": [1, 1, 17]
+      "version": [1, 1, 21]
     }
   ]
 }

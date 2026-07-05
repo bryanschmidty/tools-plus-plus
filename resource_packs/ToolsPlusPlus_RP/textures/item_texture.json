@@ -29,6 +29,18 @@
     },
     "toolsplusplus:ruby_shovel": {
       "textures": "textures/toolsplusplus/items/ruby_shovel"
+    },
+    "toolsplusplus:ruby_helmet": {
+      "textures": "textures/toolsplusplus/items/ruby_helmet"
+    },
+    "toolsplusplus:ruby_chestplate": {
+      "textures": "textures/toolsplusplus/items/ruby_chestplate"
+    },
+    "toolsplusplus:ruby_leggings": {
+      "textures": "textures/toolsplusplus/items/ruby_leggings"
+    },
+    "toolsplusplus:ruby_boots": {
+      "textures": "textures/toolsplusplus/items/ruby_boots"
     }
   }
 }

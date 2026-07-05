@@ -1,0 +1,16 @@
+---
+description: Tools++ Script API runs without Beta APIs experimental mode
+globs: behavior_packs/**/scripts/**,behavior_packs/**/manifest.json,behavior_packs/**/items/*.json,behavior_packs/**/blocks/*.json
+alwaysApply: false
+---
+
+# Tools++ scripts — no Beta APIs
+
+Tools++ behavior-pack scripts (`@minecraft/server` 2.7.0) work on normal worlds with the pack activated. **Do not instruct the user to enable Beta APIs** for XP rewards, furnace smelt tracking, or digger tool durability.
+
+World experiments that *are* sometimes needed (unrelated to scripts):
+
+- **Creation of Custom Biomes** — ruby ore world generation only
+- **Upcoming Creator Features** — optional 3D block item icons (see minecraft-bedrock-blocks skill)
+
+For script details, read `.cursor/skills/minecraft-bedrock-scripts/SKILL.md`.

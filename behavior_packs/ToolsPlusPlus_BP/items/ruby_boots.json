@@ -1,0 +1,50 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_boots",
+      "menu_category": {
+        "category": "equipment",
+        "group": "minecraft:itemGroup.name.boots"
+      }
+    },
+    "components": {
+      "minecraft:icon": "toolsplusplus:ruby_boots",
+      "minecraft:max_stack_size": 1,
+      "minecraft:enchantable": {
+        "slot": "armor_feet",
+        "value": 10
+      },
+      "minecraft:wearable": {
+        "slot": "slot.armor.feet",
+        "protection": 3
+      },
+      "minecraft:durability": {
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        },
+        "max_durability": 429
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": ["toolsplusplus:ruby_boots"],
+            "repair_amount": "context.other->query.remaining_durability"
+          },
+          {
+            "items": ["toolsplusplus:ruby"],
+            "repair_amount": "query.max_durability * 0.25"
+          }
+        ]
+      },
+      "minecraft:tags": {
+        "tags": [
+          "minecraft:is_armor",
+          "minecraft:trimmable_armors",
+          "toolsplusplus:ruby_tier"
+        ]
+      }
+    }
+  }
+}
