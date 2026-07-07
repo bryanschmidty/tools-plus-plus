@@ -1,0 +1,30 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:ruby_arrow_from_ruby_shard"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["X", "#", "A"],
+    "key": {
+      "X": {
+        "item": "toolsplusplus:ruby_shard"
+      },
+      "#": {
+        "item": "minecraft:stick"
+      },
+      "A": {
+        "item": "minecraft:feather"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:ruby_shard"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:ruby_arrow",
+      "count": 4
+    }
+  }
+}

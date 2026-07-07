@@ -41,6 +41,9 @@
     },
     "toolsplusplus:ruby_boots": {
       "textures": "textures/toolsplusplus/items/ruby_boots"
+    },
+    "toolsplusplus:ruby_arrow": {
+      "textures": "textures/toolsplusplus/items/ruby_arrow"
     }
   }
 }

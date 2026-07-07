@@ -4,6 +4,15 @@ All notable changes to **Tools++** are documented here. Version numbers match th
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.22] — 2026-07-05
+
+### Added
+- **Ruby arrow** — bow ammunition crafted with ruby shard, stick, and feather (pattern `["X", "#", "A"]`; yields 4).
+- **`toolsplusplus:ruby_arrow` projectile entity** — 2× vanilla player-arrow damage (base 2, crit 18–20); works with vanilla bow ammo cycling.
+- Red hover name via `minecraft:hover_text_color`; item icon, entity geometry, animation, and render controller.
+
+---
+
 ## [1.1.21] — 2026-07-04
 
 ### Added

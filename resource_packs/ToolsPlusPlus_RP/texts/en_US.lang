@@ -15,6 +15,7 @@ item.toolsplusplus:ruby_helmet=Ruby Helmet
 item.toolsplusplus:ruby_chestplate=Ruby Chestplate
 item.toolsplusplus:ruby_leggings=Ruby Leggings
 item.toolsplusplus:ruby_boots=Ruby Boots
+item.toolsplusplus:ruby_arrow=Ruby Arrow
 tile.toolsplusplus:ruby_ore.name=Ruby Ore
 tile.toolsplusplus:deepslate_ruby_ore.name=Deepslate Ruby Ore
 tile.toolsplusplus:ruby_block.name=Block of Ruby
