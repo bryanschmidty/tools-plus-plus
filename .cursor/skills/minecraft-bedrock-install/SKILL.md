@@ -8,6 +8,7 @@ description: Installs Tools++ Minecraft Bedrock packs on Windows — GDK vs UWP 
 ## Related skills
 
 - Pack JSON → **minecraft-bedrock-addon**
+- Versioning / CHANGELOG → **tools-plus-plus-versioning**
 - Script API → **minecraft-bedrock-scripts**
 - Textures and PNGs → **minecraft-bedrock-textures**
 

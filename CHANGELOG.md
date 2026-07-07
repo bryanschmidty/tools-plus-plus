@@ -15,6 +15,7 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 - **`scripts/install.ps1`** — when Minecraft is running, waits up to 60 seconds (poll every 3s) for the game to close instead of exiting immediately.
 - Updated **minecraft-bedrock-addon** and **minecraft-bedrock-install** skills with script cross-links and corrected experiment guidance.
+- Added **tools-plus-plus-versioning** skill; cross-linked from addon and install skills (when to bump versions vs amend the current release).
 
 ### Fixed
 - Ruby hoe, shovel, and axe no longer stay at full durability when breaking blocks.

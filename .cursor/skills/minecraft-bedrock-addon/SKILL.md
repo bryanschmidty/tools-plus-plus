@@ -9,6 +9,7 @@ description: Defines Minecraft Bedrock behavior/resource pack JSON for Tools++ �
 
 - **Custom blocks** (creative, placement, terrain textures) → **minecraft-bedrock-blocks**
 - **Script API** (main.js, XP, tool durability) → **minecraft-bedrock-scripts**
+- **Versioning and CHANGELOG** → **tools-plus-plus-versioning**
 - Textures and PNGs → **minecraft-bedrock-textures**
 - Installing to Minecraft on Windows → **minecraft-bedrock-install**
 
@@ -41,7 +42,7 @@ scripts/install.ps1
 **Behavior pack depends on resource pack — never the reverse.**
 
 - Header UUID and module UUID must differ
-- Bump `version` together in BP header, BP module, RP header, RP module, and BP dependency when content changes
+- Bump versions together — see **tools-plus-plus-versioning** (not every commit; bug fixes to a broken release stay on the same version)
 - RP manifest must **not** include a BP dependency
 
 ```json
