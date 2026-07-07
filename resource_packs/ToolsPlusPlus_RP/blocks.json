@@ -14,5 +14,20 @@
     "sound": "deepslate",
     "textures": "toolsplusplus_deepslate_ruby_ore",
     "carried_textures": "toolsplusplus_deepslate_ruby_ore"
+  },
+  "toolsplusplus:sapphire_ore": {
+    "sound": "stone",
+    "textures": "toolsplusplus_sapphire_ore",
+    "carried_textures": "toolsplusplus_sapphire_ore"
+  },
+  "toolsplusplus:sapphire_block": {
+    "sound": "metal",
+    "textures": "toolsplusplus_sapphire_block",
+    "carried_textures": "toolsplusplus_sapphire_block"
+  },
+  "toolsplusplus:deepslate_sapphire_ore": {
+    "sound": "deepslate",
+    "textures": "toolsplusplus_deepslate_sapphire_ore",
+    "carried_textures": "toolsplusplus_deepslate_sapphire_ore"
   }
 }

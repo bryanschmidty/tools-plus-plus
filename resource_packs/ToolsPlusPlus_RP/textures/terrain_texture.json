@@ -8,6 +8,15 @@
     },
     "toolsplusplus_deepslate_ruby_ore": {
       "textures": "textures/toolsplusplus/blocks/deepslate_ruby_ore"
+    },
+    "toolsplusplus_sapphire_ore": {
+      "textures": "textures/toolsplusplus/blocks/sapphire_ore"
+    },
+    "toolsplusplus_sapphire_block": {
+      "textures": "textures/toolsplusplus/blocks/sapphire_block"
+    },
+    "toolsplusplus_deepslate_sapphire_ore": {
+      "textures": "textures/toolsplusplus/blocks/deepslate_sapphire_ore"
     }
   }
 }

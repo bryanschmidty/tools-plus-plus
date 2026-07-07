@@ -1,0 +1,27 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:sapphire_axe_from_sapphires"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["XX", "X#", " #"],
+    "key": {
+      "X": {
+        "item": "toolsplusplus:sapphire"
+      },
+      "#": {
+        "item": "minecraft:stick"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:sapphire"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:sapphire_axe",
+      "count": 1
+    }
+  }
+}

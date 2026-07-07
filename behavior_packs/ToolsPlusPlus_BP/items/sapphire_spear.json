@@ -1,0 +1,208 @@
+{
+
+  "format_version": "1.26.30",
+
+  "minecraft:item": {
+
+    "description": {
+
+      "identifier": "toolsplusplus:sapphire_spear",
+
+      "menu_category": {
+
+        "category": "equipment"
+
+      }
+
+    },
+
+    "components": {
+
+      "minecraft:icon": "toolsplusplus:sapphire_spear",
+
+      "minecraft:max_stack_size": 1,
+
+      "minecraft:hand_equipped": {
+
+        "value": true
+
+      },
+
+      "minecraft:durability": {
+
+        "max_durability": 875,
+
+        "damage_chance": {
+
+          "min": 0,
+
+          "max": 100
+
+        }
+
+      },
+
+      "minecraft:damage": {
+
+        "value": 4
+
+      },
+
+      "minecraft:tags": {
+
+        "tags": [
+
+          "minecraft:is_spear",
+
+          "toolsplusplus:sapphire_tier"
+
+        ]
+
+      },
+
+      "minecraft:enchantable": {
+
+        "slot": "melee_spear",
+
+        "value": 11
+
+      },
+
+      "minecraft:use_modifiers": {
+
+        "use_duration": 72000,
+
+        "emit_vibrations": false,
+
+        "start_sound": "item.diamond_spear.use",
+
+        "movement_modifier": 1.0
+
+      },
+
+      "minecraft:cooldown": {
+
+        "category": "spear",
+
+        "duration": 1.0,
+
+        "type": "attack"
+
+      },
+
+      "minecraft:swing_duration": {
+
+        "value": 1.0
+
+      },
+
+      "minecraft:swing_sounds": {
+
+        "attack_miss": "item.diamond_spear.attack_miss",
+
+        "attack_hit": "item.diamond_spear.attack_hit"
+
+      },
+
+      "minecraft:piercing_weapon": {
+
+        "reach": {
+
+          "min": 2.0,
+
+          "max": 4.5
+
+        },
+
+        "creative_reach": {
+
+          "min": 2.0,
+
+          "max": 7.5
+
+        },
+
+        "hitbox_margin": 0.25
+
+      },
+
+      "minecraft:kinetic_weapon": {
+
+        "delay": 10,
+
+        "reach": {
+
+          "min": 2.0,
+
+          "max": 4.5
+
+        },
+
+        "creative_reach": {
+
+          "min": 2.0,
+
+          "max": 7.5
+
+        },
+
+        "hitbox_margin": 0.25,
+
+        "damage_multiplier": 1.075,
+
+        "damage_conditions": {
+
+          "max_duration": 200,
+
+          "min_relative_speed": 4.6
+
+        },
+
+        "knockback_conditions": {
+
+          "max_duration": 130,
+
+          "min_speed": 5.1
+
+        },
+
+        "dismount_conditions": {
+
+          "max_duration": 60,
+
+          "min_speed": 10.0
+
+        }
+
+      },
+
+      "minecraft:repairable": {
+
+        "repair_items": [
+
+          {
+
+            "items": ["toolsplusplus:sapphire_spear"],
+
+            "repair_amount": "context.other->query.remaining_durability"
+
+          },
+
+          {
+
+            "items": ["toolsplusplus:sapphire"],
+
+            "repair_amount": "query.max_durability * 0.25"
+
+          }
+
+        ]
+
+      }
+
+    }
+
+  }
+
+}
+

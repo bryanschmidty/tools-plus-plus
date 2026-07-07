@@ -1,0 +1,24 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:sapphire_chestplate_from_sapphires"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["X X", "XXX", "XXX"],
+    "key": {
+      "X": {
+        "item": "toolsplusplus:sapphire"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:sapphire"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:sapphire_chestplate",
+      "count": 1
+    }
+  }
+}

@@ -14,7 +14,8 @@
             "minecraft:iron_tier",
             "minecraft:diamond_tier",
             "minecraft:netherite_tier",
-            "toolsplusplus:ruby_tier"
+            "toolsplusplus:ruby_tier",
+            "toolsplusplus:sapphire_tier"
           ]
         }
       ],

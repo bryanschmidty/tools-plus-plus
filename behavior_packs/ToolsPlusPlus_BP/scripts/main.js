@@ -6,7 +6,10 @@ const ORE_MINING_XP = { min: 0, max: 2 };
 /** Vanilla-like smelt XP per output (raw iron -> iron ingot). */
 const SMELT_XP_PER_ITEM = 0.7;
 
-const SMELT_OUTPUT = "toolsplusplus:ruby_chunk";
+const SMELT_OUTPUTS = new Set([
+  "toolsplusplus:ruby_chunk",
+  "toolsplusplus:sapphire_chunk",
+]);
 
 const SMELTER_BLOCK_TYPES = new Set([
   "minecraft:furnace",
@@ -83,7 +86,8 @@ function isValidOrePickaxe(itemStack) {
     itemStack.hasTag("minecraft:iron_tier") ||
     itemStack.hasTag("minecraft:diamond_tier") ||
     itemStack.hasTag("minecraft:netherite_tier") ||
-    itemStack.hasTag("toolsplusplus:ruby_tier")
+    itemStack.hasTag("toolsplusplus:ruby_tier") ||
+    itemStack.hasTag("toolsplusplus:sapphire_tier")
   );
 }
 
@@ -118,7 +122,7 @@ function awardSmeltXp(player, itemCount) {
 }
 
 function getInventoryGain(beforeItemStack, afterItemStack) {
-  if (!afterItemStack || afterItemStack.typeId !== SMELT_OUTPUT) {
+  if (!afterItemStack || !SMELT_OUTPUTS.has(afterItemStack.typeId)) {
     return 0;
   }
 

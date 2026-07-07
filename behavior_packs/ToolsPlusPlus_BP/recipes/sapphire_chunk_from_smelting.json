@@ -1,0 +1,11 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "toolsplusplus:sapphire_chunk_from_smelting"
+    },
+    "tags": ["furnace", "blast_furnace"],
+    "input": "toolsplusplus:raw_sapphire_chunk",
+    "output": "toolsplusplus:sapphire_chunk"
+  }
+}

@@ -41,6 +41,48 @@
     },
     "toolsplusplus:ruby_boots": {
       "textures": "textures/toolsplusplus/items/ruby_boots"
+    },
+    "toolsplusplus:sapphire": {
+      "textures": "textures/toolsplusplus/items/sapphire"
+    },
+    "toolsplusplus:raw_sapphire_chunk": {
+      "textures": "textures/toolsplusplus/items/raw_sapphire_chunk"
+    },
+    "toolsplusplus:sapphire_chunk": {
+      "textures": "textures/toolsplusplus/items/sapphire_chunk"
+    },
+    "toolsplusplus:sapphire_shard": {
+      "textures": "textures/toolsplusplus/items/sapphire_shard"
+    },
+    "toolsplusplus:sapphire_pickaxe": {
+      "textures": "textures/toolsplusplus/items/sapphire_pickaxe"
+    },
+    "toolsplusplus:sapphire_sword": {
+      "textures": "textures/toolsplusplus/items/sapphire_sword"
+    },
+    "toolsplusplus:sapphire_spear": {
+      "textures": "textures/toolsplusplus/items/sapphire_spear"
+    },
+    "toolsplusplus:sapphire_axe": {
+      "textures": "textures/toolsplusplus/items/sapphire_axe"
+    },
+    "toolsplusplus:sapphire_hoe": {
+      "textures": "textures/toolsplusplus/items/sapphire_hoe"
+    },
+    "toolsplusplus:sapphire_shovel": {
+      "textures": "textures/toolsplusplus/items/sapphire_shovel"
+    },
+    "toolsplusplus:sapphire_helmet": {
+      "textures": "textures/toolsplusplus/items/sapphire_helmet"
+    },
+    "toolsplusplus:sapphire_chestplate": {
+      "textures": "textures/toolsplusplus/items/sapphire_chestplate"
+    },
+    "toolsplusplus:sapphire_leggings": {
+      "textures": "textures/toolsplusplus/items/sapphire_leggings"
+    },
+    "toolsplusplus:sapphire_boots": {
+      "textures": "textures/toolsplusplus/items/sapphire_boots"
     }
   }
 }

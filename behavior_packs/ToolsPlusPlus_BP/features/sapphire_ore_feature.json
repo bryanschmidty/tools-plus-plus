@@ -1,0 +1,24 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:ore_feature": {
+    "description": {
+      "identifier": "toolsplusplus:sapphire_ore_feature"
+    },
+    "count": 8,
+    "replace_rules": [
+      {
+        "places_block": "toolsplusplus:sapphire_ore",
+        "may_replace": [
+          "minecraft:stone"
+        ]
+      },
+      {
+        "places_block": "toolsplusplus:deepslate_sapphire_ore",
+        "may_replace": [
+          "minecraft:deepslate",
+          "minecraft:tuff"
+        ]
+      }
+    ]
+  }
+}

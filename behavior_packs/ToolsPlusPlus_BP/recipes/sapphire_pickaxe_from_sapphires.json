@@ -1,0 +1,27 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:sapphire_pickaxe_from_sapphires"
+    },
+    "tags": ["crafting_table"],
+    "pattern": ["XXX", " # ", " # "],
+    "key": {
+      "X": {
+        "item": "toolsplusplus:sapphire"
+      },
+      "#": {
+        "item": "minecraft:stick"
+      }
+    },
+    "unlock": [
+      {
+        "item": "toolsplusplus:sapphire"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:sapphire_pickaxe",
+      "count": 1
+    }
+  }
+}

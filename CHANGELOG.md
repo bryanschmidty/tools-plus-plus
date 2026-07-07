@@ -4,6 +4,18 @@ All notable changes to **Tools++** are documented here. Version numbers match th
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.22] — 2026-07-06
+
+### Added
+- **Full sapphire tier** — mirrors ruby: sapphire ore and deepslate sapphire ore, raw/chunk/gem/shard materials, storage block, pickaxe/axe/shovel/hoe/sword/spear, and armor set with `toolsplusplus:sapphire_tier` tag.
+- **Sapphire world generation** — overworld ore feature at Y 32–96 (ruby remains Y 0–62).
+- **Unified sapphire blue textures** — recolored from ruby art via `scripts/recolor-ruby-to-sapphire.ps1` using a consistent royal-blue palette distinct from Lapis Lazuli.
+- **`scripts/generate-sapphire-json.ps1`** — clones ruby behavior/resource JSON for sapphire content.
+
+### Changed
+- **`scripts/main.js`** — smelt XP and ore pickaxe validation support both ruby and sapphire tiers/chunks.
+- Ore loot tables accept both `ruby_tier` and `sapphire_tier` pickaxes.
+
 ## [1.1.21] — 2026-07-04
 
 ### Added
