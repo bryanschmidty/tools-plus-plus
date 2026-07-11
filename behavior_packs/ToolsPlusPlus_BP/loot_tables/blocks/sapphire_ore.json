@@ -22,7 +22,16 @@
       "entries": [
         {
           "type": "item",
-          "name": "toolsplusplus:raw_sapphire_chunk"
+          "name": "toolsplusplus:sapphire",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         }
       ]
     }

@@ -5,6 +5,7 @@
 param(
     [string[]]$InputPaths,
     [switch]$All,
+    [switch]$ToolsOnly,
     [switch]$InPlace
 )
 
@@ -46,10 +47,32 @@ function Get-Luminance {
     return (0.299 * $Color.R) + (0.587 * $Color.G) + (0.114 * $Color.B)
 }
 
+function Test-WoodBrownPixel {
+    param([System.Drawing.Color]$Color)
+
+    if ($Color.G -lt 20) {
+        return $false
+    }
+
+    if ($Color.R -lt 35) {
+        return $false
+    }
+
+    $redGreenGap = $Color.R - $Color.G
+    $greenBlueGap = $Color.G - $Color.B
+
+    # Oak stick / tool handle browns: green is substantial, blue is the lowest channel.
+    return ($redGreenGap -lt 55 -and $greenBlueGap -ge 5 -and $Color.G -ge 25)
+}
+
 function Test-RecolorCandidate {
     param([System.Drawing.Color]$Color)
 
     if ($Color.A -le 16) {
+        return $false
+    }
+
+    if (Test-WoodBrownPixel -Color $Color) {
         return $false
     }
 
@@ -225,6 +248,29 @@ function Get-DefaultRubyToSapphirePairs {
 }
 
 $sapphirePalette = Get-SapphirePalette
+
+if ($ToolsOnly) {
+    $toolNames = @(
+        "ruby_pickaxe",
+        "ruby_axe",
+        "ruby_shovel",
+        "ruby_hoe",
+        "ruby_sword",
+        "ruby_spear"
+    )
+    foreach ($name in $toolNames) {
+        $sapphireName = $name -replace "ruby", "sapphire"
+        Convert-TextureFile `
+            -InputPath (Join-Path $ItemsDir "$name.png") `
+            -OutputPath (Join-Path $ItemsDir "$sapphireName.png") `
+            -SapphirePalette $sapphirePalette
+    }
+    Convert-TextureFile `
+        -InputPath (Join-Path $SpearDir "ruby_spear.png") `
+        -OutputPath (Join-Path $SpearDir "sapphire_spear.png") `
+        -SapphirePalette $sapphirePalette
+    exit 0
+}
 
 if ($All) {
     $pairs = Get-DefaultRubyToSapphirePairs

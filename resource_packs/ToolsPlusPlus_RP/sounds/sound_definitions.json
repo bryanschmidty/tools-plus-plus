@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "toolsplusplus.eagle_eye_sfx": {
+      "category": "player",
+      "max_distance": 32.0,
+      "min_distance": 1.0,
+      "sounds": [
+        {
+          "name": "sounds/toolsplusplus/eagle_eye_sfx",
+          "stream": false,
+          "volume": 1.0,
+          "pitch": 1.0,
+          "is3D": true,
+          "interruptible": true,
+          "weight": 1
+        }
+      ]
+    },
+    "toolsplusplus.camera_zoom": {
+      "category": "player",
+      "max_distance": 16.0,
+      "min_distance": 1.0,
+      "sounds": [
+        {
+          "name": "sounds/toolsplusplus/camera_zoom",
+          "stream": false,
+          "volume": 0.35,
+          "pitch": 1.0,
+          "is3D": true,
+          "interruptible": true,
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

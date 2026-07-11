@@ -1,4 +1,4 @@
-import { system, world, EquipmentSlot, GameMode, Player } from "@minecraft/server";
+import { system, world, EquipmentSlot, GameMode, Player, EntityDamageCause } from "@minecraft/server";
 
 /** Vanilla-like ore mining XP (iron/gold/copper/deepslate variants). */
 const ORE_MINING_XP = { min: 0, max: 2 };
@@ -6,9 +6,26 @@ const ORE_MINING_XP = { min: 0, max: 2 };
 /** Vanilla-like smelt XP per output (raw iron -> iron ingot). */
 const SMELT_XP_PER_ITEM = 0.7;
 
+const RIFLE_ID = "toolsplusplus:eagle_eye_rifle";
+const AMMO_ITEM_ID = "toolsplusplus:rifle_ammo";
+const RIFLE_SOUND_ID = "toolsplusplus.eagle_eye_sfx";
+const SCOPE_SOUND_ID = "toolsplusplus.camera_zoom";
+const RIFLE_BULLET_TAG = "toolsplusplus:rifle_bullet";
+const RIFLE_COOLDOWN_TICKS = 12;
+const SPYGLASS_FOV = 3;
+const SCOPE_SLOWNESS_AMPLIFIER = 3;
+const SCOPE_SLOWNESS_DURATION = 20;
+const BULLET_SPEED = 5;
+const BULLET_DAMAGE = 8;
+
+/** @type {Map<string, number>} */
+const lastShotTick = new Map();
+
+/** @type {Map<string, boolean>} */
+const isScoped = new Map();
+
 const SMELT_OUTPUTS = new Set([
   "toolsplusplus:ruby_chunk",
-  "toolsplusplus:sapphire_chunk",
 ]);
 
 const SMELTER_BLOCK_TYPES = new Set([
@@ -197,6 +214,123 @@ const DiggingDurabilityComponent = {
   },
 };
 
+function getMainhandItem(player) {
+  const equippable = player.getComponent("minecraft:equippable");
+  return equippable?.getEquipment(EquipmentSlot.Mainhand);
+}
+
+function isHoldingRifle(player) {
+  return getMainhandItem(player)?.typeId === RIFLE_ID;
+}
+
+function consumeAmmo(player) {
+  const inventory = player.getComponent("minecraft:inventory");
+  const container = inventory?.container;
+  if (!container) {
+    return false;
+  }
+
+  for (let slot = 0; slot < container.size; slot++) {
+    const stackItem = container.getItem(slot);
+    if (stackItem?.typeId === AMMO_ITEM_ID) {
+      if (stackItem.amount > 1) {
+        stackItem.amount -= 1;
+        container.setItem(slot, stackItem);
+      } else {
+        container.setItem(slot, undefined);
+      }
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function spawnRifleBullet(player) {
+  const viewDirection = player.getViewDirection();
+  const head = player.getHeadLocation();
+  const spawnAt = {
+    x: head.x + viewDirection.x * 0.6,
+    y: head.y + viewDirection.y * 0.2,
+    z: head.z + viewDirection.z * 0.6,
+  };
+
+  const bullet = player.dimension.spawnEntity("minecraft:arrow", spawnAt);
+  bullet.addTag(RIFLE_BULLET_TAG);
+
+  const projectile = bullet.getComponent("minecraft:projectile");
+  if (projectile) {
+    projectile.owner = player;
+  }
+
+  bullet.applyImpulse({
+    x: viewDirection.x * BULLET_SPEED,
+    y: viewDirection.y * BULLET_SPEED,
+    z: viewDirection.z * BULLET_SPEED,
+  });
+}
+
+function fireRifle(player) {
+  const currentTick = system.currentTick;
+  const lastTick = lastShotTick.get(player.id) ?? -Infinity;
+  if (currentTick - lastTick < RIFLE_COOLDOWN_TICKS) {
+    return;
+  }
+
+  if (!consumeAmmo(player)) {
+    player.dimension.playSound(RIFLE_SOUND_ID, player.location, { volume: 0.3, pitch: 1.8 });
+    player.onScreenDisplay.setActionBar("Eagle Eye Rifle: Out of ammo!");
+    return;
+  }
+
+  lastShotTick.set(player.id, currentTick);
+  player.dimension.playSound(RIFLE_SOUND_ID, player.location, { volume: 1, pitch: 1 });
+  spawnRifleBullet(player);
+}
+
+function applySpyglassScope(player) {
+  try {
+    player.camera.setFov({ fov: SPYGLASS_FOV });
+  } catch (_error) {
+    // Camera may be unavailable in restricted contexts.
+  }
+
+  player.addEffect("slowness", SCOPE_SLOWNESS_DURATION, {
+    amplifier: SCOPE_SLOWNESS_AMPLIFIER,
+    showParticles: false,
+  });
+}
+
+function beginScope(player) {
+  isScoped.set(player.id, true);
+  player.dimension.playSound(SCOPE_SOUND_ID, player.location, { volume: 0.22, pitch: 1.0 });
+  applySpyglassScope(player);
+}
+
+function resetScope(player) {
+  try {
+    player.camera.clear();
+  } catch (_error) {
+    // Ignore camera clear failures.
+  }
+
+  try {
+    player.removeEffect("slowness");
+  } catch (_error) {
+    // Ignore effect removal failures.
+  }
+
+  isScoped.set(player.id, false);
+}
+
+function handleRifleScopeRelease(event) {
+  if (event.itemStack?.typeId !== RIFLE_ID || !(event.source instanceof Player)) {
+    return;
+  }
+
+  resetScope(event.source);
+}
+
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent(
     "toolsplusplus:experience_reward",
@@ -249,3 +383,77 @@ world.afterEvents.playerInventoryItemChange.subscribe((event) => {
   awardSmeltXp(event.player, gained);
   extendSmeltSession(event.player);
 });
+
+world.beforeEvents.itemUse.subscribe((event) => {
+  if (event.itemStack?.typeId !== RIFLE_ID) {
+    return;
+  }
+
+  // Cancel vanilla item-use state so left-click attacks still work while aiming.
+  event.cancel = true;
+
+  const player = event.source;
+  system.run(() => {
+    if (!isScoped.get(player.id)) {
+      beginScope(player);
+    }
+  });
+});
+
+world.afterEvents.playerSwingStart.subscribe((event) => {
+  if (!isHoldingRifle(event.player)) {
+    return;
+  }
+
+  fireRifle(event.player);
+});
+
+world.afterEvents.itemReleaseUse.subscribe(handleRifleScopeRelease);
+world.afterEvents.itemStopUse.subscribe(handleRifleScopeRelease);
+
+world.afterEvents.projectileHitEntity.subscribe((event) => {
+  const bullet = event.projectile;
+  if (!bullet?.hasTag(RIFLE_BULLET_TAG)) {
+    return;
+  }
+
+  const hit = event.getEntityHit();
+  const victim = hit?.entity;
+  const shooter = event.source;
+  if (!victim || victim.id === shooter?.id) {
+    bullet.remove();
+    return;
+  }
+
+  victim.applyDamage(BULLET_DAMAGE, {
+    cause: EntityDamageCause.projectile,
+    damagingEntity: shooter,
+  });
+
+  if (victim.isValid) {
+    const viewDirection = shooter?.getViewDirection();
+    if (viewDirection) {
+      victim.applyKnockback({ x: viewDirection.x, z: viewDirection.z }, 0.2);
+    }
+  }
+
+  bullet.remove();
+});
+
+world.afterEvents.projectileHitBlock.subscribe((event) => {
+  if (event.projectile?.hasTag(RIFLE_BULLET_TAG)) {
+    event.projectile.remove();
+  }
+});
+
+system.runInterval(() => {
+  for (const player of world.getAllPlayers()) {
+    if (isHoldingRifle(player)) {
+      if (isScoped.get(player.id)) {
+        applySpyglassScope(player);
+      }
+    } else if (isScoped.get(player.id)) {
+      resetScope(player);
+    }
+  }
+}, 4);

@@ -45,12 +45,6 @@
     "toolsplusplus:sapphire": {
       "textures": "textures/toolsplusplus/items/sapphire"
     },
-    "toolsplusplus:raw_sapphire_chunk": {
-      "textures": "textures/toolsplusplus/items/raw_sapphire_chunk"
-    },
-    "toolsplusplus:sapphire_chunk": {
-      "textures": "textures/toolsplusplus/items/sapphire_chunk"
-    },
     "toolsplusplus:sapphire_shard": {
       "textures": "textures/toolsplusplus/items/sapphire_shard"
     },
@@ -83,6 +77,12 @@
     },
     "toolsplusplus:sapphire_boots": {
       "textures": "textures/toolsplusplus/items/sapphire_boots"
+    },
+    "toolsplusplus:eagle_eye_rifle": {
+      "textures": "textures/toolsplusplus/items/eagle_eye_rifle"
+    },
+    "toolsplusplus:rifle_ammo": {
+      "textures": "textures/toolsplusplus/items/rifle_ammo"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "com_eagle_eye_rifle_3jdckckc:rifle_ammo",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "com_eagle_eye_rifle_3jdckckc:rifle_ammo",
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common"
+    }
+  }
+}

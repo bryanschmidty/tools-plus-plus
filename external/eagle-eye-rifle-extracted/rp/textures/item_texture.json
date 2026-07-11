@@ -1,0 +1,12 @@
+{
+  "resource_pack_name": "my_sword_resource_pack",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "com_eagle_eye_rifle_3jdckckc:my_sword": {
+      "textures": "textures/com/eagle_eye_rifle_3jdckckc/items/my_sword"
+    },
+    "com_eagle_eye_rifle_3jdckckc:rifle_ammo": {
+      "textures": "textures/com/eagle_eye_rifle_3jdckckc/items/rifle_ammo"
+    }
+  }
+}

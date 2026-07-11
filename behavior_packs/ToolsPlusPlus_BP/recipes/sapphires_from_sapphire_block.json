@@ -2,7 +2,7 @@
   "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
-      "identifier": "toolsplusplus:sapphire_chunks_from_sapphire_block"
+      "identifier": "toolsplusplus:sapphires_from_sapphire_block"
     },
     "tags": ["crafting_table"],
     "pattern": ["B"],
@@ -17,7 +17,7 @@
       }
     ],
     "result": {
-      "item": "toolsplusplus:sapphire_chunk",
+      "item": "toolsplusplus:sapphire",
       "count": 9
     }
   }

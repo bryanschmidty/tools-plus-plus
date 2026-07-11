@@ -1,0 +1,61 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Right-click cycles five spyglass zooms, left-click fires\u2014silenced scope snap and steadier crouch shots.",
+    "name": "Eagle Eye Rifle",
+    "uuid": "0b642b6b-a6b0-4f4b-86de-c03b1411ac56",
+    "version": [
+      5,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      93
+    ],
+    "pack_scope": "world"
+  },
+  "modules": [
+    {
+      "description": "Eagle Eye Rifle Behavior Pack",
+      "type": "data",
+      "uuid": "24cfdfb1-94fe-4a24-9f2e-bb52cfc41869",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "description": "Custom Components",
+      "type": "script",
+      "language": "javascript",
+      "uuid": "510f0e46-8415-4256-b9fa-31fd87fc5e19",
+      "version": [
+        1,
+        0,
+        0
+      ],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "9e62386c-62bc-4470-a682-3abeff33a712",
+      "version": [
+        5,
+        0,
+        0
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.0.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    }
+  ]
+}

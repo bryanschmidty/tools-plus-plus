@@ -1,0 +1,41 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Right-click cycles five spyglass zooms, left-click fires\u2014silenced scope snap and steadier crouch shots.",
+    "name": "Eagle Eye Rifle",
+    "uuid": "9e62386c-62bc-4470-a682-3abeff33a712",
+    "version": [
+      5,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      93
+    ],
+    "pack_scope": "world"
+  },
+  "modules": [
+    {
+      "description": "Eagle Eye Rifle Resource Pack",
+      "type": "resources",
+      "uuid": "25711e37-490a-46e9-8666-a7619e169da9",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0b642b6b-a6b0-4f4b-86de-c03b1411ac56",
+      "version": [
+        5,
+        0,
+        0
+      ]
+    }
+  ]
+}

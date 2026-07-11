@@ -1,0 +1,42 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "toolsplusplus:rifle_ammo"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      " G ",
+      " I "
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:copper_ingot"
+      },
+      "G": {
+        "item": "minecraft:gunpowder"
+      },
+      "I": {
+        "item": "minecraft:iron_nugget"
+      }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:copper_ingot"
+      },
+      {
+        "item": "minecraft:gunpowder"
+      },
+      {
+        "item": "minecraft:iron_nugget"
+      }
+    ],
+    "result": {
+      "item": "toolsplusplus:rifle_ammo",
+      "count": 8
+    }
+  }
+}

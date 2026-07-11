@@ -2,18 +2,18 @@
   "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
-      "identifier": "toolsplusplus:sapphire_block_from_sapphire_chunks"
+      "identifier": "toolsplusplus:sapphire_block_from_sapphires"
     },
     "tags": ["crafting_table"],
-    "pattern": ["CCC", "CCC", "CCC"],
+    "pattern": ["SSS", "SSS", "SSS"],
     "key": {
-      "C": {
-        "item": "toolsplusplus:sapphire_chunk"
+      "S": {
+        "item": "toolsplusplus:sapphire"
       }
     },
     "unlock": [
       {
-        "item": "toolsplusplus:sapphire_chunk"
+        "item": "toolsplusplus:sapphire"
       }
     ],
     "result": {

@@ -1,0 +1,48 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "com_eagle_eye_rifle_3jdckckc:my_sword"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " AI",
+      "SIR",
+      " IS"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:spyglass"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "S": {
+        "item": "minecraft:stick"
+      },
+      "R": {
+        "item": "minecraft:tripwire_hook"
+      }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:spyglass"
+      },
+      {
+        "item": "minecraft:iron_ingot"
+      },
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "minecraft:tripwire_hook"
+      }
+    ],
+    "result": {
+      "item": "com_eagle_eye_rifle_3jdckckc:my_sword",
+      "count": 1
+    }
+  }
+}

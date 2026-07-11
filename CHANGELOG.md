@@ -4,17 +4,27 @@ All notable changes to **Tools++** are documented here. Version numbers match th
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.23] — 2026-07-08
+
+### Added
+- **Eagle Eye Rifle** — hold right-click for spyglass-style zoom (single level); left-click fires an arrow projectile (works zoomed or not). Requires rifle ammo.
+- **Rifle ammo** crafting recipe and rifle crafting recipe (spyglass + iron + tripwire hook).
+
+### Fixed
+- **Eagle Eye Rifle** — scope zoom is 2× stronger; left-click firing now works while holding right-click to aim (item use no longer blocks attacks).
+
 ## [1.1.22] — 2026-07-06
 
 ### Added
-- **Full sapphire tier** — mirrors ruby: sapphire ore and deepslate sapphire ore, raw/chunk/gem/shard materials, storage block, pickaxe/axe/shovel/hoe/sword/spear, and armor set with `toolsplusplus:sapphire_tier` tag.
+- **Full sapphire tier** — mirrors ruby tools/armor/spear and storage block; sapphire ore drops 1–3 sapphires directly (no raw chunk or smelt step).
 - **Sapphire world generation** — overworld ore feature at Y 32–96 (ruby remains Y 0–62).
 - **Unified sapphire blue textures** — recolored from ruby art via `scripts/recolor-ruby-to-sapphire.ps1` using a consistent royal-blue palette distinct from Lapis Lazuli.
 - **`scripts/generate-sapphire-json.ps1`** — clones ruby behavior/resource JSON for sapphire content.
 
 ### Changed
-- **`scripts/main.js`** — smelt XP and ore pickaxe validation support both ruby and sapphire tiers/chunks.
+- **`scripts/main.js`** — smelt XP and ore pickaxe validation support ruby tier; sapphire no longer uses smelting.
 - Ore loot tables accept both `ruby_tier` and `sapphire_tier` pickaxes.
+- **Sapphire processing** — ore drops 1–3 sapphires; block crafted from 9 sapphires (removed raw/chunk items and smelt recipe).
 
 ## [1.1.21] — 2026-07-04
 
